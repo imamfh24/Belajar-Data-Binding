@@ -1,5 +1,6 @@
 package com.ifa.databinding;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -10,7 +11,7 @@ import android.os.Bundle;
 
 import com.ifa.databinding.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainNavigator {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +23,16 @@ public class MainActivity extends AppCompatActivity {
         //Setup View Model
         MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
+        viewModel.setNavigator(this);
         viewModel.setUser();
         viewModel.getUser().observe(this, user -> {
             binding.recyclerView.setAdapter(new MainAdapter(user, viewModel));
         });
 
+    }
+
+    @Override
+    public void onItemClick(User user) {
+        new AlertDialog.Builder(this).setMessage(user.name + "\n" + user.email).show();
     }
 }

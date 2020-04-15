@@ -10,6 +10,12 @@ public class MainViewModel extends ViewModel {
 
     private MutableLiveData<List<User>> user = new MutableLiveData<>();
 
+    private MainNavigator navigator;
+
+    public void setNavigator(MainNavigator navigator) {
+        this.navigator = navigator;
+    }
+
     public MutableLiveData<List<User>> getUser(){
         return user;
     }
@@ -24,4 +30,7 @@ public class MainViewModel extends ViewModel {
         this.user.setValue(users);
     }
 
+    public void itemClick(User user){
+        navigator.onItemClick(user);
+    }
 }
