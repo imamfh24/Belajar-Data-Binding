@@ -33,6 +33,22 @@ public class MainActivity extends AppCompatActivity implements MainNavigator {
 
     @Override
     public void onItemClick(User user) {
-        new AlertDialog.Builder(this).setMessage(user.name + "\n" + user.email).show();
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage(user.name + "\n" + user.email);
+
+        if(user.isMark.get()){
+            alert.setPositiveButton("UNMARK", ((dialog, which) -> {
+                user.isMark.set(false);
+                dialog.dismiss();
+            }));
+        } else {
+            alert.setPositiveButton("MARK", ((dialog, which) -> {
+                user.isMark.set(true);
+                dialog.dismiss();
+            }));
+        }
+
+        alert.show();
+
     }
 }

@@ -1,5 +1,7 @@
 package com.ifa.databinding;
 
+import androidx.databinding.ObservableBoolean;
+
 public class User {
 
     public String name;
@@ -9,4 +11,6 @@ public class User {
         this.name = name;
         this.email = email;
     }
+
+    public ObservableBoolean isMark = new ObservableBoolean(false);
 }
